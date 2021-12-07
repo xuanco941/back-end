@@ -15,6 +15,9 @@ const Route = require('./routes/index');
 
 Route(app);
 
+app.get('/',(req, res) => {
+    console.log(req.headers.authorization);
+})
 
 app.listen(process.env.PORT, () => {
     console.log('listen port 5000 : http://localhost:5000')
