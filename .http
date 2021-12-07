@@ -1,0 +1,19 @@
+GET http://localhost:5000
+
+###
+POST http://localhost:5000/signup
+Content-Type: application/json
+
+{
+    "username": "son",
+    "password": "123"
+}
+
+###
+POST http://localhost:5000/signin
+Content-Type: application/json
+
+{
+    "username": "xuan",
+    "password": "123"
+}
