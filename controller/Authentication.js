@@ -27,7 +27,7 @@ class Authentication {
         const username = req.body.username.trim();
         const password = req.body.password.trim();
 
-        UserSchema.findOne({username: username}).then((user) => {
+        UserSchema.findOne({ username: username }).then((user) => {
             if (user) {
                 if (bcrypt.compareSync(password, user.password) === true) {
                     const accessToken = generateAccessToken({ username });
@@ -45,15 +45,19 @@ class Authentication {
     }
 
     RefreshToken(req, res) {
+        if (!req.body.refreshToken) res.status(403).json({ status: 'error', message: 'Không tìm thấy Refresh Token' });
         const refreshToken = req.body.refreshToken;
-        if(!refreshToken) res.status(403).json({status: 'error', message: 'Không tìm thấy Refresh Token'});
-        UserSchema.findOne({refreshToken}).then(user => {
-            if(!user) res.status(403).json({status: 'error', message: 'Refresh Token không hợp lệ'});
-            jwt.verify(refreshToken,process.env.SECRET_KEY_REFRESH, (err, user) =>{
-                if(err) res.status(401).json({status: 'error', message: 'Xác thực Refresh Token gặp lỗi'});
-                const accessToken = generateAccessToken({username: user.username});
-                res.status(201).json({status: 'success', data: {accessToken}});
-            });
+        UserSchema.findOne({ refreshToken }).then(user => {
+            if (!user) res.status(403).json({ status: 'error', message: 'Refresh Token không hợp lệ' });
+            else {
+                jwt.verify(refreshToken, process.env.SECRET_KEY_REFRESH, (err, user) => {
+                    if (err) res.status(401).json({ status: 'error', message: 'Xác thực Refresh Token gặp lỗi' });
+                    else {
+                        const accessToken = generateAccessToken({ username: user.username });
+                        res.status(201).json({ status: 'success', data: { accessToken } });
+                    }
+                });
+            }
         })
     }
 }

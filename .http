@@ -1,5 +1,5 @@
-GET http://localhost:5000
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNvbjEiLCJpYXQiOjE2Mzg4NjU5MTgsImV4cCI6MTYzODg2NTk0OH0.hpMjNKv6LE7boROvXsDOoVh_RZzdPK98oZvQ_dZ2Sas
+GET http://localhost:5000/home
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNvbjEiLCJpYXQiOjE2Mzg4OTM2NTMsImV4cCI6MTYzODg5MzY4M30.agfwDU1gJyMxMiZ6B2fuzCjdjcRhtPiHYZfpafqsQjM
 
 ###
 POST http://localhost:5000/signup
@@ -25,6 +25,6 @@ POST http://localhost:5000/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNvbjEiLCJpYXQiOjE2Mzg4NjM5Mjh9.hqokvGVWUVSzevZ62XNz6jQlhaFgA0Zz0aJvAjWBNzQ"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNvbjEiLCJpYXQiOjE2Mzg4OTcxMTN9.B__uAfKnUQcJzkt_lCkHcutr4DWOtNYy-8xv3lLsQVk"
 }
 
