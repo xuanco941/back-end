@@ -11,12 +11,13 @@ app.use(cors());
 const connectDataBase = require('./modal/ConnectDB');
 connectDataBase();
 
+const CheckToken = require('./middleware/CheckToken');
 const Route = require('./routes/index');
 
 Route(app);
 
-app.get('/',(req, res) => {
-    console.log(req.headers.authorization);
+app.get('/', CheckToken ,(req, res) => {
+    res.json(req.user)
 })
 
 app.listen(process.env.PORT, () => {

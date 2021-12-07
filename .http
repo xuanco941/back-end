@@ -1,5 +1,5 @@
 GET http://localhost:5000
-Authorization: Bearer 1111111111111111111
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNvbjEiLCJpYXQiOjE2Mzg4NjU5MTgsImV4cCI6MTYzODg2NTk0OH0.hpMjNKv6LE7boROvXsDOoVh_RZzdPK98oZvQ_dZ2Sas
 
 ###
 POST http://localhost:5000/signup
