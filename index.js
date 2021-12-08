@@ -5,23 +5,18 @@ dotenv.config();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-const multer = require('multer');
 const cors = require('cors');
 app.use(cors());
 const connectDataBase = require('./model/ConnectDB');
 connectDataBase();
 
-const CheckToken = require('./middleware/CheckToken');
 const Route = require('./routes/index');
 
 Route(app);
 
-app.get('/home', CheckToken, (req, res) => {
-    res.json(req.user)
-})
 
 app.get('/', (req, res) => {
-    res.sendFile('./admin/index.html', { root: __dirname });
+    res.sendFile('./index.html', { root: __dirname });
 })
 
 

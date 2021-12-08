@@ -7,18 +7,18 @@ function generateAccessToken(data) {
 }
 
 class Admin {
-    SignIn(req, res) {
+    async SignIn(req, res) {
         const username = req.body.username.trim();
         const password = req.body.password.trim();
 
-        AdminSchema.findOne({ username: username }).then((user) => {
+        await AdminSchema.findOne({ username: username }).then((user) => {
             if (user) {
                 if (bcrypt.compareSync(password, user.password) === true) {
-                    const accessToken = generateAccessToken({ username });
-                    const refreshToken = jwt.sign({ username }, process.env.SECRET_KEY_REFRESH_ADMIN);
-                    user.refreshToken = refreshToken;
+                    const accessTokenAdmin = generateAccessToken({ username });
+                    const refreshTokenAdmin = jwt.sign({ username }, process.env.SECRET_KEY_REFRESH_ADMIN);
+                    user.refreshTokenAdmin = refreshTokenAdmin;
                     user.save();
-                    res.status(200).json({ status: 'success', data: { accessToken, refreshToken } });
+                    res.status(200).json({ status: 'success', data: { accessTokenAdmin, refreshTokenAdmin } });
                 }
                 else
                     res.status(401).json({ status: 'error', message: 'Sai tài khoản hoặc mật khẩu' })
@@ -28,13 +28,13 @@ class Admin {
         })
     }
 
-    SignUp(req, res) {
+    async SignUp(req, res) {
         const username = req.body.username.trim();
         const password = req.body.password.trim();
         const saltRounds = 10;
         const hash = bcrypt.hashSync(password, saltRounds);
 
-        AdminSchema.findOne({ username: username })
+        await AdminSchema.findOne({ username: username })
             .then(user => {
                 if (user) res.status(401).json({ status: 'error', message: 'Tài khoản này đã tồn tại' })
                 else AdminSchema.create({ username: username, password: hash }).then(() => {
@@ -45,13 +45,13 @@ class Admin {
 
 
 
-    RefreshToken(req, res) {
-        if (!req.body.refreshToken) res.status(403).json({ status: 'error', message: 'Không tìm thấy Refresh Token' });
-        const refreshToken = req.body.refreshToken;
-        AdminSchema.findOne({ refreshToken }).then(user => {
+    async RefreshToken(req, res) {
+        if (!req.body.refreshTokenAdmin) res.status(403).json({ status: 'error', message: 'Không tìm thấy Refresh Token' });
+        const refreshTokenAdmin = req.body.refreshTokenAdmin;
+        await AdminSchema.findOne({ refreshTokenAdmin }).then(user => {
             if (!user) res.status(403).json({ status: 'error', message: 'Refresh Token không hợp lệ' });
             else {
-                jwt.verify(refreshToken, process.env.SECRET_KEY_REFRESH_ADMIN, (err, user) => {
+                jwt.verify(refreshTokenAdmin, process.env.SECRET_KEY_REFRESH_ADMIN, (err, user) => {
                     if (err) res.status(401).json({ status: 'error', message: 'Xác thực Refresh Token gặp lỗi' });
                     else {
                         const accessToken = generateAccessToken({ username: user.username });

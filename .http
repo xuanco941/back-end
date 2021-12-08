@@ -1,7 +1,7 @@
-POST http://localhost:5000/signin
+POST http://localhost:5000/product/post-product
 Content-Type: application/json
 
 {
-    "username": "admin",
-    "password": "admin"
+    "nameProduct": "admin1 dfipfwhe irh ewr",
+    "password": "admin1"
 }
