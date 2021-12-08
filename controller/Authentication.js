@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const UserSchema = require('../modal/UserSchema');
+const UserSchema = require('../model/UserSchema');
 
 function generateAccessToken(data) {
     return jwt.sign(data, process.env.SECRET_KEY, { expiresIn: process.env.SECRET_KEY_EXP })
