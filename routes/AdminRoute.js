@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const LoginAdmin = require('../admin/LoginAdmin');
+const LoginAdmin = require('../controller/SignInAdmin');
 
 
-router.post('/login', LoginAdmin.LogIn);
-router.post('/logup', LoginAdmin.LogUp);
+router.post('/signin', LoginAdmin.SignIn);
+router.post('/signup', LoginAdmin.SignUp);
+router.post('/refresh-token' , LoginAdmin.RefreshToken);
 
 module.exports = router;

@@ -20,9 +20,9 @@ app.get('/home', CheckToken, (req, res) => {
     res.json(req.user)
 })
 
-// app.get('/', (req, res) => {
-//     res.sendFile('./index.html', { root: __dirname });
-// })
+app.get('/', (req, res) => {
+    res.sendFile('./admin/index.html', { root: __dirname });
+})
 
 
 // const storageimg = multer.diskStorage({

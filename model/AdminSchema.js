@@ -6,6 +6,7 @@ const Admin = new Schema(
         username: String,
         password: String
     },{
+        timestamps: true,
         collection: 'Admin'
     }
 )

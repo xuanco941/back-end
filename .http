@@ -1,39 +1,7 @@
-GET http://localhost:5000/home
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNvbjEiLCJpYXQiOjE2Mzg4OTM2NTMsImV4cCI6MTYzODg5MzY4M30.agfwDU1gJyMxMiZ6B2fuzCjdjcRhtPiHYZfpafqsQjM
-
-###
-POST http://localhost:5000/admin/logup
+POST http://localhost:5000/signin
 Content-Type: application/json
 
 {
-    "username": "son1",
-    "password": "123"
+    "username": "admin",
+    "password": "admin"
 }
-
-###
-POST http://localhost:5000/admin/login
-Content-Type: application/json
-
-{
-    "username": "son1",
-    "password": "123"
-}
-
-###
-
-POST http://localhost:5000/refresh-token
-Content-Type: application/json
-
-{
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNvbjEiLCJpYXQiOjE2Mzg4OTcxMTN9.B__uAfKnUQcJzkt_lCkHcutr4DWOtNYy-8xv3lLsQVk"
-}
-
-###
-POST http://localhost:5000/post-product
-Content-Type: application/json
-
-{
-    "title": "12321"
-}
-
-### 
