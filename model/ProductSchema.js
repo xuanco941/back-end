@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const Product = new Schema({
   nameProduct: String,
-  category: {type: String, default: 'Giay'},
+  category: {type: String, default: 'shoes'},
   price: {type: Number, default: 0} ,
   type : {type: Array , default:[{size: 42, amount: 0}]} ,
   image : Array,
