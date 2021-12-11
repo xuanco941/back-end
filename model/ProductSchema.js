@@ -3,13 +3,13 @@ const Schema = mongoose.Schema;
 
 const Product = new Schema({
   nameProduct: String,
-  category: {type: String, default: 'shoes'},
+  category: {type: String},
   price: {type: Number, default: 0} ,
   type : {type: Array , default:[{size: 42, amount: 0}]} ,
   image : Array,
   sale: {type: Number, default: 0},
   description: String,
-  status: {type: Boolean, default: false},
+  status: {type: Boolean, default: true},
   categoryColor: String
 }, {
   timestamps: true,

@@ -1,7 +1,13 @@
-POST http://localhost:5000/user/signup
+POST http://localhost:5000/product/post-product/
 Content-Type: application/json
 
 {
-    "username": "xuan",
-    "password": "admin1"
+    "category": "Áo",
+    "color": "#f8afaf",
+    "description": "dep",
+    "image": [],
+    "nameProduct": "name1",
+    "price": "200000",
+    "sale": "5",
+    "type": "{size: 40, amount: 6}"
 }

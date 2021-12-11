@@ -13,6 +13,7 @@ class Product {
         const categoryColor = req.body.categoryColor;
 
         const product = { nameProduct, category, type, image, sale, description, status, categoryColor };
+        console.log(image);
 
 
         await ProductSchema.create(product).then((response) => {
