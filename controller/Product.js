@@ -2,11 +2,13 @@ const ProductSchema = require('../model/ProductSchema');
 const multer = require('multer');
 const fs = require('fs');
 const cloudinary = require('cloudinary').v2;
+
+
 cloudinary.config({
-    cloud_name: 'dh3sptfo2',
-    api_key: '293775476763951',
-    api_secret: '2VGrf9jRppUf6J7gdRKuG1rqRZc'
-})
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+  })
 
 
 
@@ -32,18 +34,20 @@ class Product {
         const status = req.body.status;
         const categoryColor = req.body.categoryColor;
 
-        const imgs = req.files
         let links = [];
-        for (const element of imgs) {
-            await cloudinary.uploader.upload('uploads/' + element.filename, function (error, result) { links.push(result.url); fs.unlinkSync('./uploads/' + element.filename) });
+        for (const element of req.files) {
+            await cloudinary.uploader.upload('uploads/' + element.filename,
+            function (error, result) {
+                 links.push(result.url); fs.unlinkSync('./uploads/' + element.filename) 
+                });
         }
         const image = [];
         const sizeIMG = 'h_500,w_500';
         for (const elm of links){
-            await image.push(elm.replace('upload/','upload/'+sizeIMG+'/'));
+            image.push(elm.replace('upload/','upload/'+sizeIMG+'/'));
         }
         
-        const product = { nameProduct, category, type, image : links, sale, description, status, categoryColor };
+        const product = { nameProduct, category, type, image, sale, description, status, categoryColor };
 
 
         await ProductSchema.create(product).then((response) => {
