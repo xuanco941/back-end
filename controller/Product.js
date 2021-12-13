@@ -28,11 +28,17 @@ class Product {
     async postProduct(req, res) {
         const nameProduct = req.body.nameProduct;
         const category = req.body.category;
-        const type = req.body.type;
+        const type = {
+            size: req.body.size,
+            amount: req.body.amount
+        };
         const sale = req.body.sale;
         const description = req.body.description;
         const status = req.body.status;
-        const categoryColor = req.body.categoryColor;
+        const color = req.body.color;
+        const price = req.body.price;
+
+        console.log(req);
 
         let links = [];
         for (const element of req.files) {
@@ -47,7 +53,7 @@ class Product {
             image.push(elm.replace('upload/','upload/'+sizeIMG+'/'));
         }
         
-        const product = { nameProduct, category, type, image, sale, description, status, categoryColor };
+        const product = { nameProduct, price ,category, type, image, sale, description, status, color };
 
 
         await ProductSchema.create(product).then((response) => {

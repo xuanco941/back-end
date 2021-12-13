@@ -10,7 +10,7 @@ const Product = new Schema({
   sale: {type: Number, default: 0},
   description: String,
   status: {type: Boolean, default: true},
-  categoryColor: String
+  color: String
 }, {
   timestamps: true,
   collection: 'Product'
