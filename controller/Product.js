@@ -38,8 +38,6 @@ class Product {
         const color = req.body.color;
         const price = req.body.price;
 
-        console.log(req);
-
         let links = [];
         for (const element of req.files) {
             await cloudinary.uploader.upload('uploads/' + element.filename,
@@ -65,6 +63,12 @@ class Product {
             }
         })
 
+    }
+
+    async getAllProduct(req, res){
+        ProductSchema.find({}).then(product => {
+            product ? res.status(200).json(product) : res.status(404).json('error');
+        })
     }
 }
 

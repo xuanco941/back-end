@@ -11,3 +11,6 @@ Content-Type: application/json
     "sale": "5",
     "type": "{size: 40, amount: 6}"
 }
+
+### 
+GET http://localhost:5000/product
