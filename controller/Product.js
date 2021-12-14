@@ -8,7 +8,7 @@ cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET
-  })
+})
 
 
 
@@ -39,19 +39,21 @@ class Product {
         const price = req.body.price;
 
         let links = [];
-        for (const element of req.files) {
-            await cloudinary.uploader.upload('uploads/' + element.filename,
-            function (error, result) {
-                 links.push(result.url); fs.unlinkSync('./uploads/' + element.filename) 
-                });
+        if (req.files) {
+            for (const element of req.files) {
+                await cloudinary.uploader.upload('uploads/' + element.filename,
+                    function (error, result) {
+                        links.push(result.url); fs.unlinkSync('./uploads/' + element.filename)
+                    });
+            }
         }
         const image = [];
         const sizeIMG = 'h_500,w_500';
-        for (const elm of links){
-            image.push(elm.replace('upload/','upload/'+sizeIMG+'/'));
+        for (const elm of links) {
+            image.push(elm.replace('upload/', 'upload/' + sizeIMG + '/'));
         }
-        
-        const product = { nameProduct, price ,category, type, image, sale, description, status, color };
+
+        const product = { nameProduct, price, category, type, image, sale, description, status, color };
 
 
         await ProductSchema.create(product).then((response) => {
@@ -65,9 +67,9 @@ class Product {
 
     }
 
-    async getAllProduct(req, res){
-        ProductSchema.find({}).then(product => {
-            product ? res.status(200).json(product) : res.status(404).json('error');
+    async getAllProduct(req, res) {
+        await ProductSchema.find({}).then(product => {
+            product ? res.status(200).json({ product }) : res.status(404).json('error');
         })
     }
 }
