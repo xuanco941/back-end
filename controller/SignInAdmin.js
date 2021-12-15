@@ -38,7 +38,7 @@ class Admin {
             .then(user => {
                 if (user) res.status(401).json({ status: 'error', message: 'Tài khoản này đã tồn tại' })
                 else AdminSchema.create({ username: username, password: hash }).then(() => {
-                    res.status(201).json({ status: 'success' });
+                    res.status(201).json({ status: 'success' , message: 'Tạo tài khoản thành công' });
                 })
             })
     }
@@ -46,13 +46,13 @@ class Admin {
 
 
     async RefreshToken(req, res) {
-        if (!req.body.refreshTokenAdmin) res.status(403).json({ status: 'error', message: 'Không tìm thấy Refresh Token' });
+        if (!req.body.refreshTokenAdmin) res.status(403).json({ status: 'error', message: 'Không tìm thấy Refresh Token Admin' });
         const refreshTokenAdmin = req.body.refreshTokenAdmin;
         await AdminSchema.findOne({ refreshTokenAdmin }).then(user => {
-            if (!user) res.status(403).json({ status: 'error', message: 'Refresh Token không hợp lệ' });
+            if (!user) res.status(403).json({ status: 'error', message: 'Refresh Token Admin không hợp lệ' });
             else {
                 jwt.verify(refreshTokenAdmin, process.env.SECRET_KEY_REFRESH_ADMIN, (err, user) => {
-                    if (err) res.status(401).json({ status: 'error', message: 'Xác thực Refresh Token gặp lỗi' });
+                    if (err) res.status(401).json({ status: 'error', message: 'Xác thực Refresh Token Admin gặp lỗi' });
                     else {
                         const accessToken = generateAccessToken({ username: user.username });
                         res.status(201).json({ status: 'success', data: { accessToken } });

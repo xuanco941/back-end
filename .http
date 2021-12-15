@@ -25,3 +25,13 @@ Content-Type: application/json
 {
     "idProduct": "61b71be0658e471fafe00894"
 }
+
+
+###
+POST http://localhost:5000/admin/signup
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}

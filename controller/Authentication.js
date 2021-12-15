@@ -17,7 +17,7 @@ class Authentication {
             .then(user => {
                 if (user) res.status(401).json({ status: 'error', message: 'Tài khoản này đã tồn tại' })
                 else UserSchema.create({ username: username, password: hash }).then(() => {
-                    res.status(201).json({ status: 'success' });
+                    res.status(201).json({ status: 'success',message: 'Tạo tài khoản thành công' });
                 })
             })
 
