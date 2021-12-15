@@ -72,6 +72,21 @@ class Product {
             product ? res.status(200).json({ product }) : res.status(404).json('error');
         })
     }
+
+    async getAProduct(req, res) {
+        await ProductSchema.findOne({ _id: req.params.idProduct }).then(product => {
+            product ? res.status(200).json({ product }) : res.status(404).json({status: 'error', message: 'Sản phẩm này không tồn tại.'});
+        })
+        .catch(err => res.status(404).json({status: 'error', message: 'Đường dẫn này không tồn tại.'}))
+    }
+
+
+    async deleteAProduct(req,res) {
+        await ProductSchema.deleteOne({_id: req.body.idProduct})
+        .then(data => res.status(200).json({status: 'success'}))
+        .catch(err => res.status(500).json({status: 'error', message: 'Xóa không thành công, lỗi hệ thống'}))
+    }
+
 }
 
 module.exports = new Product();

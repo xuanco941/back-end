@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const CheckToken = (req, res, next) => {
+const CheckUser = (req, res, next) => {
     if (!req.headers.authorization) res.status(401).json({ status: 'error', message: 'Request không có Access Token' });
     else {
         const token = req.headers.authorization.split(' ')[1];
@@ -13,4 +13,4 @@ const CheckToken = (req, res, next) => {
 
 }
 
-module.exports = CheckToken
+module.exports = CheckUser
