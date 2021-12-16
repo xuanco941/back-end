@@ -6,9 +6,13 @@ const CheckAdmin = (req, res, next) => {
     else {
         const token = req.headers.authorization.split(' ')[1];
         jwt.verify(token, process.env.SECRET_KEY_ADMIN, (err, data) => {
-            if (err) res.status(403).json({ status: 'error', message: 'Check token admin failure' });
-            req.user = data;
-            next();
+            if (err) {
+                res.status(403).json({ status: 'error', message: 'Check token admin failure' });
+            }
+            else{
+                req.user = data;
+                next();
+            }
         })
     }
 

@@ -54,8 +54,8 @@ class Admin {
                 jwt.verify(refreshTokenAdmin, process.env.SECRET_KEY_REFRESH_ADMIN, (err, user) => {
                     if (err) res.status(401).json({ status: 'error', message: 'Xác thực Refresh Token Admin gặp lỗi' });
                     else {
-                        const accessToken = generateAccessToken({ username: user.username });
-                        res.status(201).json({ status: 'success', data: { accessToken } });
+                        const accessTokenAdmin = generateAccessToken({ username: user.username });
+                        res.status(201).json({ status: 'success', data: { accessTokenAdmin } });
                     }
                 });
             }

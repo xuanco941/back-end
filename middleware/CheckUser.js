@@ -5,9 +5,14 @@ const CheckUser = (req, res, next) => {
     else {
         const token = req.headers.authorization.split(' ')[1];
         jwt.verify(token, process.env.SECRET_KEY, (err, data) => {
-            if (err) res.status(403).json({ status: 'error', message: 'Check token failure' });
-            req.user = data;
-            next();
+            if (err) {
+                res.status(403).json({ status: 'error', message: 'Check token failure' });
+            }
+            else{
+                req.user = data;
+                next();
+            }
+          
         })
     }
 
